@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/CarControllerScene.unity
+    path: Assets/Data Files/Scenes/CarControllerScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/TerrainCarScene.unity
+    path: Assets/Data Files/Scenes/TerrainCarScene.unity
     guid: 5d22e5bdf2fbc7949abaf39da0d46d2d
   - enabled: 1
-    path: Assets/Scenes/UIScene.unity
+    path: Assets/Data Files/Scenes/UIScene.unity
     guid: 2b1d3ab8f422d1642a0f0a4dbc06f0b5
   m_configObjects: {}

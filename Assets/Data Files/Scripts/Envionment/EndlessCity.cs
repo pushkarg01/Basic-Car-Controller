@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class EndlessCity : MonoBehaviour
@@ -10,10 +7,9 @@ public class EndlessCity : MonoBehaviour
 
     [SerializeField] Transform otherCity;
 
-
     void Start()
     {
-        carTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        carTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
 
     private void Update()

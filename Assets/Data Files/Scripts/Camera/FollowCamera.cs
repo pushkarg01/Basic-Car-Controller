@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class FollowCamera : MonoBehaviour
 {
-    private Transform carTransform;
-    private Transform cameraPointTransform;
+    private Transform carTransform, cameraPointTransform;
 
     private Vector3 velocity = Vector3.zero;
 
