@@ -104,7 +104,12 @@ public class CarMovement : MonoBehaviour
 
             rb.drag = 0f;
         }
+    }
 
+    public float CarSpeed()
+    {
+        float speed=rb.velocity.magnitude * 2.23693629f;
+        return speed;
     }
 
 }
