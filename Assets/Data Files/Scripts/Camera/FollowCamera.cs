@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FollowCamera : MonoBehaviour
 {
+    #region Follow Car Logic
+
     private Transform carTransform, cameraPointTransform;
 
     private Vector3 velocity = Vector3.zero;
@@ -19,4 +21,5 @@ public class FollowCamera : MonoBehaviour
         transform.LookAt(carTransform.position);
         transform.position = Vector3.SmoothDamp(transform.position,cameraPointTransform.position,ref velocity,7f*Time.deltaTime);
     }
+#endregion
 }
