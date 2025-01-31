@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class CarMovement : MonoBehaviour
 {
-    [SerializeField] WheelCollider frontRightWheelCollider;
-    [SerializeField] WheelCollider frontLeftWheelCollider;
-    [SerializeField] WheelCollider backRightWheelCollider;
-    [SerializeField] WheelCollider backLeftWheelCollider;
+    #region Variables
 
+    [SerializeField] WheelCollider frontRightWheelCollider, frontLeftWheelCollider, backRightWheelCollider, backLeftWheelCollider;
 
-    [SerializeField] Transform frontRightWheelTransform;
-    [SerializeField] Transform frontLeftWheelTransform;
-    [SerializeField] Transform backRightWheelTransform;
-    [SerializeField] Transform backLeftWheelTransform;
+    [SerializeField] Transform frontRightWheelTransform, frontLeftWheelTransform, backRightWheelTransform, backLeftWheelTransform;
 
     [SerializeField] Transform carCenterOfMass;
 
@@ -22,23 +17,29 @@ public class CarMovement : MonoBehaviour
 
     private Rigidbody rb;
     private float horizontalInput, verticalInput;
+    #endregion
 
+    #region Start Logic
     void Start()
     {
         rb= GetComponent<Rigidbody>();
         rb.centerOfMass=carCenterOfMass.localPosition;
     }
-   
+    #endregion
+
+    #region FixedUpdate Logic
+
     void FixedUpdate()
     {
         GetInputMovement();
         MotorForce();
         Steering();
         UpdateWheels();
-        PowerSteering();
         ApplyBreak();
     }
+    #endregion
 
+    #region Movement and Steering Logic
     void GetInputMovement()
     {
         horizontalInput =Input.GetAxis("Horizontal");
@@ -47,9 +48,8 @@ public class CarMovement : MonoBehaviour
 
    void MotorForce()
    {    
-            frontRightWheelCollider.motorTorque = motorForce * verticalInput;
-            frontLeftWheelCollider.motorTorque = motorForce * verticalInput;
-
+        frontRightWheelCollider.motorTorque = motorForce * verticalInput;
+        frontLeftWheelCollider.motorTorque = motorForce * verticalInput;
    }
 
     void Steering()
@@ -57,15 +57,9 @@ public class CarMovement : MonoBehaviour
         frontRightWheelCollider.steerAngle = steerRotation * horizontalInput;
         frontLeftWheelCollider.steerAngle = steerRotation * horizontalInput;
     }
+    #endregion
 
-    void PowerSteering()
-    {
-        if (horizontalInput == 0)
-        {
-            transform.rotation= Quaternion.Slerp(transform.rotation,Quaternion.Euler(0f,0f,0f),Time.deltaTime);
-        }
-    }
-
+    #region Wheel Rotation Logic
     void UpdateWheels()
     {
         RotateWheel(frontRightWheelCollider,frontRightWheelTransform);
@@ -83,7 +77,9 @@ public class CarMovement : MonoBehaviour
         transform.position = pos;   
         transform.rotation = quat;
     }
+    #endregion
 
+    #region Break Logic
     void ApplyBreak()
     {
         if (Input.GetKey(KeyCode.Space))
@@ -92,8 +88,6 @@ public class CarMovement : MonoBehaviour
             frontLeftWheelCollider.brakeTorque = brakeForce;
             backRightWheelCollider.brakeTorque = brakeForce;
             backLeftWheelCollider.brakeTorque = brakeForce;
-
-            rb.drag = 1f;
         }
         else
         {
@@ -101,15 +95,8 @@ public class CarMovement : MonoBehaviour
             frontLeftWheelCollider.brakeTorque = 0f;
             backRightWheelCollider.brakeTorque = 0f;
             backLeftWheelCollider.brakeTorque = 0f;
-
-            rb.drag = 0f;
         }
     }
-
-    public float CarSpeed()
-    {
-        float speed=rb.velocity.magnitude * 2.23693629f;
-        return speed;
-    }
+    #endregion
 
 }
